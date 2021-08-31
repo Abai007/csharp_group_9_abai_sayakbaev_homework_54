@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using homework_54.Models;
 
 namespace homework_54.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20210831113119_ChangeReviewEntiy")]
+    partial class ChangeReviewEntiy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,21 +94,15 @@ namespace homework_54.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("BrendId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Grade")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("PhoneId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PhoneId");
+                    b.HasIndex("BrendId");
 
                     b.ToTable("Reviews");
                 });
@@ -135,13 +131,13 @@ namespace homework_54.Migrations
 
             modelBuilder.Entity("homework_54.Models.Review", b =>
                 {
-                    b.HasOne("homework_54.Models.Phone", "Phone")
+                    b.HasOne("homework_54.Models.Brend", "Brend")
                         .WithMany()
-                        .HasForeignKey("PhoneId")
+                        .HasForeignKey("BrendId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Phone");
+                    b.Navigation("Brend");
                 });
 #pragma warning restore 612, 618
         }
