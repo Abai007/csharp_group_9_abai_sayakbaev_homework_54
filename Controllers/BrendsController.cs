@@ -14,6 +14,22 @@ namespace homework_54.Controllers
         {
             _db = db;
         }
+        public IActionResult Editing(int id)
+        {
+            var brand = _db.Brends.FirstOrDefault(b => b.Id == id);
+            return View(brand);
+        }
+        [HttpPost]
+        public IActionResult Editing(Brend brend)
+        {
+            Brend p = _db.Brends.FirstOrDefault(p => p.Id == brend.Id);
+            p.Name = brend.Name;
+            p.Email = brend.Email;
+            p.DataOfCreate = brend.DataOfCreate;
+            _db.Brends.Update(p);
+            _db.SaveChanges();
+            return RedirectToAction("index");
+        }
 
         public IActionResult Index()
         {
@@ -52,7 +68,14 @@ namespace homework_54.Controllers
         public bool CheckName(Brend Brand)
         {
             var brend = _db.Brends.Any(b => b.Name == Brand.Name);
-            return brend;
+            if (brend == true)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         public bool CheckDate(Brend brend)
         {

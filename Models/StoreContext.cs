@@ -13,6 +13,7 @@ namespace homework_54.Models
         public DbSet<Phone> Products { get; set; }
         public DbSet<Brend> Brends { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         public StoreContext(DbContextOptions<StoreContext> options)
 
